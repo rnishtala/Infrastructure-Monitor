@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Software Documentation &mdash; Infrastructure Management 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Infrastructure Management 1.0 documentation" href="index.html" />
+    <link rel="prev" title="README" href="readme.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="software-documentation">
+<h1>Software Documentation<a class="headerlink" href="#software-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="conventions-used">
+<h2>Conventions used<a class="headerlink" href="#conventions-used" title="Permalink to this headline">¶</a></h2>
+<p>&#64;param - this represents a parameter</p>
+<p>&#64;return - annotates return type</p>
+<p>{string} - this means type string</p>
+<p>(description) - used to explain a parameter or return type</p>
+<p>{} - Used to explain formats</p>
+</div>
+<div class="section" id="module-generateLogs">
+<span id="generate-logs"></span><h2>Generate logs<a class="headerlink" href="#module-generateLogs" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="generateLogs.generate_log">
+<code class="descclassname">generateLogs.</code><code class="descname">generate_log</code><span class="sig-paren">(</span><em>logfile</em>, <em>current_datetime</em>, <em>ip</em><span class="sig-paren">)</span><a class="headerlink" href="#generateLogs.generate_log" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>This function generates logs in the format {unixtime IP CPU_id usage}</li>
+<li>&#64;param  {string} logfile</li>
+<li>&#64;param {datetime} datetime</li>
+<li>&#64;return {none}  none</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="generateLogs.main">
+<code class="descclassname">generateLogs.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#generateLogs.main" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>This function reads command line options and generates IP addresses</li>
+<li>The IP address range is 192.168.10.16 - 192.168.13.246</li>
+<li>The logs are written every 0.057 of a second which estimates to 1000</li>
+<li>logs per per minute</li>
+<li>Each of the logs within a minute are from different servers</li>
+<li>&#64;return {none} none</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="generateLogs.read_options">
+<code class="descclassname">generateLogs.</code><code class="descname">read_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#generateLogs.read_options" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>This functions adds user entered options or uses default options to generate logs</li>
+<li>The default options are {&#8211;logfile eventlog.log &#8211;date 2014-10-31}</li>
+<li>As shown above the options are the &lt;complete_path_of_log_with_name&gt; and &lt;date&gt;</li>
+<li>&#64;return {OptionParser} (options)</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-query">
+<span id="query-logs"></span><h2>Query logs<a class="headerlink" href="#module-query" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="query.main">
+<code class="descclassname">query.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#query.main" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>This function parses lines and stores ip addresses in a dictionary</li>
+<li>It also starts a while loop to query until the user chooses to exit</li>
+<li>&#64;return {none} none</li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="query.runQuery">
+<code class="descclassname">query.</code><code class="descname">runQuery</code><span class="sig-paren">(</span><em>query</em>, <em>parsed_ips</em><span class="sig-paren">)</span><a class="headerlink" href="#query.runQuery" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Parses through the dictionary of IP addresses and retrives timestamp and CPU usage</li>
+<li>&#64;param  {string} query (query entered by user)</li>
+<li>&#64;param  {dictionary} parsed_ips (dictionary of IP addresses with timestamp and CPU data)</li>
+<li>Format of the dictionary: {ip:{timestamp:(cpu_usage,cpu_id)}}</li>
+<li>&#64;return {none}  none</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="module-utilities">
+<span id="utilities"></span><h2>Utilities<a class="headerlink" href="#module-utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="utilities.ipv4check">
+<em class="property">class </em><code class="descclassname">utilities.</code><code class="descname">ipv4check</code><a class="headerlink" href="#utilities.ipv4check" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class has a method to check if an ipv4 address is valid</p>
+<p>It uses the socket library</p>
+<p>The class is called from the query module</p>
+<dl class="method">
+<dt id="utilities.ipv4check.isValid_ipv4">
+<code class="descname">isValid_ipv4</code><span class="sig-paren">(</span><em>address</em><span class="sig-paren">)</span><a class="headerlink" href="#utilities.ipv4check.isValid_ipv4" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Checks if ipv4 is valid</li>
+<li>&#64;param  {string}  address (ipv4)</li>
+<li>&#64;return {Boolean}</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="utilities.convertTime">
+<em class="property">class </em><code class="descclassname">utilities.</code><code class="descname">convertTime</code><a class="headerlink" href="#utilities.convertTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class has a method to convert unix time to a human readable format</p>
+<p>The format is (Y-m-d H:M:S)</p>
+<p>This class is called from the query module</p>
+<dl class="method">
+<dt id="utilities.convertTime.convertTime">
+<code class="descname">convertTime</code><span class="sig-paren">(</span><em>time</em><span class="sig-paren">)</span><a class="headerlink" href="#utilities.convertTime.convertTime" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>converts unix time to human readable date and time in format Y-m-d H:M:S</li>
+<li>&#64;param  {float} time (unix time)</li>
+<li>&#64;return {datetime}  (date and time)</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="utilities.cpu">
+<em class="property">class </em><code class="descclassname">utilities.</code><code class="descname">cpu</code><a class="headerlink" href="#utilities.cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class has methods that generate random cpu id and usage</p>
+<p>It is called from the generateLogs module</p>
+<dl class="method">
+<dt id="utilities.cpu.random_cpu">
+<code class="descname">random_cpu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilities.cpu.random_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>generates cpu id</li>
+<li>&#64;return {int} (cpu id)</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="utilities.cpu.random_usage">
+<code class="descname">random_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#utilities.cpu.random_usage" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Generate random CPU usage</li>
+<li>&#64;return {int} (cpu usage)</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="utilities.unixtime">
+<em class="property">class </em><code class="descclassname">utilities.</code><code class="descname">unixtime</code><a class="headerlink" href="#utilities.unixtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class has a method that ingests a datetime string
+and converts it into unixtime.</p>
+<p>This is called from the generateLogs module</p>
+<dl class="method">
+<dt id="utilities.unixtime.unixtime">
+<code class="descname">unixtime</code><span class="sig-paren">(</span><em>current_datetime</em><span class="sig-paren">)</span><a class="headerlink" href="#utilities.unixtime.unixtime" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>calculates unix time</li>
+<li>&#64;return {timestamp} unix time</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="utilities.validate">
+<em class="property">class </em><code class="descclassname">utilities.</code><code class="descname">validate</code><a class="headerlink" href="#utilities.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class has a method to validate if a user has entered the date and time
+in proper format.</p>
+<p>The format is (Y-m-d H:M)</p>
+<p>This class is used in the query module</p>
+<dl class="method">
+<dt id="utilities.validate.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>date_text</em><span class="sig-paren">)</span><a class="headerlink" href="#utilities.validate.validate" title="Permalink to this definition">¶</a></dt>
+<dd><ul class="simple">
+<li>Check if datetime is valid</li>
+<li>&#64;param  {string} date_text</li>
+<li>&#64;return {Boolean}</li>
+</ul>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Software Documentation</a><ul>
+<li><a class="reference internal" href="#conventions-used">Conventions used</a></li>
+<li><a class="reference internal" href="#module-generateLogs">Generate logs</a></li>
+<li><a class="reference internal" href="#module-query">Query logs</a></li>
+<li><a class="reference internal" href="#module-utilities">Utilities</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="readme.html" title="previous chapter">README</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/code.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Raj Nishtala.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.8</a>
+      
+      |
+      <a href="_sources/code.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
